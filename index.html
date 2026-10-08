@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mangosteen Cafe | 15 Years of Community & Specialty Brews in Indore</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display for headers, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        plum: {
+                            DEFAULT: '#4A1525',
+                            dark: '#2D0A14',
+                            light: '#6B2338',
+                        },
+                        amber: {
+                            gold: '#D4AF37',
+                            accent: '#E6A15C',
+                            warm: '#F4C430'
+                        },
+                        sage: {
+                            DEFAULT: '#2A382A',
+                            light: '#485C48',
+                            soft: '#E8EFE8'
+                        },
+                        cream: {
+                            DEFAULT: '#FAF6F0',
+                            dark: '#F0EAE1',
+                            card: '#FFFFFF'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .backdrop-blur-custom {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hero-gradient {
+            background: linear-gradient(180deg, rgba(45, 10, 20, 0.75) 0%, rgba(45, 10, 20, 0.85) 100%);
+        }
+        .gold-border-glow:hover {
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #2D0A14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-cream font-sans text-gray-800 antialiased selection:bg-amber-gold selection:text-plum-dark">
+
+    <!-- Main Header -->
+    <header class="bg-plum-dark text-cream sticky top-0 z-40 border-b border-amber-gold/20 shadow-xl transition-all duration-300" id="main-header">
+        <div class="container mx-auto px-4 md:px-8 py-3.5 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-amber-gold to-amber-accent flex items-center justify-center p-0.5 shadow-md group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-plum-dark rounded-full flex items-center justify-center">
+                        <i class="fas fa-leaf text-amber-gold text-lg md:text-xl transform -rotate-45"></i>
+                    </div>
+                </div>
+                <div>
+                    <span class="font-serif text-xl md:text-2xl font-bold tracking-wide text-cream group-hover:text-amber-gold transition">Mangosteen</span>
+                    <span class="block text-[10px] uppercase tracking-[0.25em] text-amber-gold/90 font-sans font-medium">Cafe & Lifestyle</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center space-x-8 text-sm font-medium">
+                <a href="#home" class="text-amber-gold transition font-semibold">Home</a>
+                <a href="#about" class="hover:text-amber-gold transition text-cream/90">About Us</a>
+                <a href="#menu" class="hover:text-amber-gold transition text-cream/90">Menu</a>
+                <a href="#atmosphere" class="hover:text-amber-gold transition text-cream/90">Gallery</a>
+                <a href="#reviews" class="hover:text-amber-gold transition text-cream/90">Reviews</a>
+                <a href="#location" class="hover:text-amber-gold transition text-cream/90">Contact</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="hidden sm:flex items-center space-x-4">
+                <button onclick="openPdfModal()" class="border border-amber-gold/50 text-amber-gold hover:bg-amber-gold hover:text-plum-dark px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition duration-300 flex items-center space-x-2">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>PDF Menu</span>
+                </button>
+                <button onclick="openBookingModal()" class="bg-gradient-to-r from-amber-gold to-amber-accent text-plum-dark hover:from-amber-accent hover:to-amber-gold px-5 py-2.5 rounded-lg text-xs md:text-sm font-bold shadow-lg transition duration-300 transform hover:-translate-y-0.5">
+                    Reserve Table
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden text-cream focus:outline-none p-2">
+                <i class="fas fa-bars text-2xl text-amber-gold" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-plum border-t border-amber-gold/20 px-6 py-6 space-y-4">
+            <a href="#home" onclick="toggleMobileMenu()" class="block text-amber-gold font-medium py-1">Home</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block text-cream hover:text-amber-gold py-1">About Us</a>
+            <a href="#menu" onclick="toggleMobileMenu()" class="block text-cream hover:text-amber-gold py-1">Interactive Menu</a>
+            <a href="#atmosphere" onclick="toggleMobileMenu()" class="block text-cream hover:text-amber-gold py-1">Atmosphere</a>
+            <a href="#reviews" onclick="toggleMobileMenu()" class="block text-cream hover:text-amber-gold py-1">Reviews</a>
+            <a href="#location" onclick="toggleMobileMenu()" class="block text-cream hover:text-amber-gold py-1">Contact & Map</a>
+            <div class="pt-4 border-t border-amber-gold/20 flex flex-col space-y-3">
+                <button onclick="toggleMobileMenu(); openPdfModal();" class="w-full text-center border border-amber-gold text-amber-gold py-2.5 rounded-lg text-sm font-semibold">
+                    <i class="fas fa-file-pdf mr-2"></i>View PDF Menu
+                </button>
+                <button onclick="toggleMobileMenu(); openBookingModal();" class="w-full text-center bg-amber-gold text-plum-dark py-2.5 rounded-lg text-sm font-bold shadow">
+                    Reserve Table Now
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-[88vh] flex items-center justify-center bg-plum-dark overflow-hidden">
+        <!-- Background Overlay & Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1920&q=80" alt="Mangosteen Cafe Cozy Atmosphere" class="w-full h-full object-cover object-center transform scale-105 filter brightness-75">
+            <div class="absolute inset-0 hero-gradient"></div>
+        </div>
+
+        <div class="container mx-auto px-4 md:px-8 relative z-10 py-20 text-center">
+            <!-- Badge -->
+            <div class="inline-flex items-center space-x-2 bg-amber-gold/20 backdrop-blur-md border border-amber-gold/40 text-amber-gold px-4 py-1.5 rounded-full text-xs md:text-sm font-medium mb-6">
+                <i class="fas fa-star text-amber-warm"></i>
+                <span>4.7 Rating (2,200+ Google & Justdial Reviews)</span>
+            </div>
+
+            <!-- Title -->
+            <h1 class="font-serif text-4xl sm:text-5xl md:text-7xl font-bold text-cream tracking-tight mb-6 max-w-4xl mx-auto leading-tight">
+                15 Years of <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-amber-gold via-amber-accent to-cream">Community</span>, Crafted Coffee & Unforgettable Moments
+            </h1>
+
+            <p class="text-cream/80 text-base md:text-xl max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+                Indore’s iconic artisanal retreat in Bicholi Mardana. Serving woodfired pizzas, specialty brews, and authentic global comfort eats.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
+                <a href="#menu" class="w-full sm:w-auto bg-gradient-to-r from-amber-gold to-amber-accent hover:from-amber-accent hover:to-amber-gold text-plum-dark font-bold px-8 py-4 rounded-xl shadow-xl transition transform hover:-translate-y-1 flex items-center justify-center space-x-2">
+                    <span>Explore Our Menu</span>
+                    <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+                <button onclick="openBookingModal()" class="w-full sm:w-auto bg-plum/60 hover:bg-plum border border-amber-gold/40 backdrop-blur-md text-cream font-semibold px-8 py-4 rounded-xl transition transform hover:-translate-y-1 flex items-center justify-center space-x-2">
+                    <i class="fas fa-utensils text-amber-gold"></i>
+                    <span>Reserve a Table</span>
+                </button>
+            </div>
+
+            <!-- Quick Feature Badges -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 max-w-4xl mx-auto border-t border-amber-gold/20 pt-8 text-cream/90 text-xs md:text-sm">
+                <div class="flex items-center justify-center space-x-2 bg-plum-dark/40 py-2.5 px-3 rounded-lg backdrop-blur-sm border border-amber-gold/10">
+                    <i class="fas fa-leaf text-amber-gold"></i>
+                    <span>Eco-Lifestyle Vibe</span>
+                </div>
+                <div class="flex items-center justify-center space-x-2 bg-plum-dark/40 py-2.5 px-3 rounded-lg backdrop-blur-sm border border-amber-gold/10">
+                    <i class="fas fa-mug-hot text-amber-gold"></i>
+                    <span>Specialty Coffee</span>
+                </div>
+                <div class="flex items-center justify-center space-x-2 bg-plum-dark/40 py-2.5 px-3 rounded-lg backdrop-blur-sm border border-amber-gold/10">
+                    <i class="fas fa-pizza-slice text-amber-gold"></i>
+                    <span>Woodfired Pizza</span>
+                </div>
+                <div class="flex items-center justify-center space-x-2 bg-plum-dark/40 py-2.5 px-3 rounded-lg backdrop-blur-sm border border-amber-gold/10">
+                    <i class="fas fa-wifi text-amber-gold"></i>
+                    <span>Work-Friendly Nook</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-20 bg-cream">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Text Content -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-block px-3.5 py-1 bg-sage/10 text-sage font-semibold text-xs rounded-full uppercase tracking-widest">
+                        Established Legacy
+                    </div>
+                    <h2 class="font-serif text-3xl md:text-5xl font-bold text-plum-dark leading-tight">
+                        "Building Community Before Building Product"
+                    </h2>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed font-light">
+                        For over 15 years, <strong class="text-plum font-semibold">Mangosteen Cafe</strong> has stood as a peaceful haven nestled near Mayank Blue Water Park Road in Indore. What started as a passionate dream to blend sustainable living with world-class coffee has grown into Indore’s beloved cultural and culinary landmark.
+                    </p>
+                    <p class="text-gray-600 text-sm md:text-base leading-relaxed">
+                        Whether you are looking for a tranquil nook to complete your remote work with our high-speed Wi-Fi, gathering with loved ones over our handcrafted 12-inch <em>Ottoman Empire Pizza</em>, or savoring an authentic Thai Green Curry bowl—Mangosteen welcomes you with open arms and rustic warmth.
+                    </p>
+
+                    <!-- Key Pillars -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                        <div class="flex items-start space-x-3.5 p-4 bg-cream-dark rounded-xl border border-gray-200">
+                            <div class="w-10 h-10 rounded-lg bg-plum text-amber-gold flex items-center justify-center shrink-0">
+                                <i class="fas fa-coffee text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-plum-dark text-sm">Artisanal Brews</h3>
+                                <p class="text-xs text-gray-600 mt-1">Single-origin beans freshly ground for every cup.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3.5 p-4 bg-cream-dark rounded-xl border border-gray-200">
+                            <div class="w-10 h-10 rounded-lg bg-sage text-cream flex items-center justify-center shrink-0">
+                                <i class="fas fa-seedling text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-plum-dark text-sm">Sustainable Ethos</h3>
+                                <p class="text-xs text-gray-600 mt-1">Eco-friendly spaces, lush greenery, and conscious ingredients.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Collage -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Mangosteen Cafe Interior" class="w-full h-80 md:h-96 object-cover transform hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="absolute -bottom-6 -left-6 w-3/5 rounded-2xl overflow-hidden shadow-2xl border-4 border-white z-20 hidden sm:block">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80" alt="Artisanal Pizza" class="w-full h-44 object-cover">
+                    </div>
+                    <div class="absolute -top-6 -right-6 bg-amber-gold text-plum-dark p-6 rounded-2xl shadow-xl z-20 text-center font-serif hidden sm:block">
+                        <span class="block text-3xl font-extrabold">15+</span>
+                        <span class="text-xs font-sans font-bold uppercase tracking-wider">Years of Excellence</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Menu Showcase -->
+    <section id="menu" class="py-20 bg-plum-dark text-cream relative overflow-hidden">
+        <div class="container mx-auto px-4 md:px-8 relative z-10">
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-amber-gold font-semibold text-xs md:text-sm uppercase tracking-widest">Handcrafted Delights</span>
+                <h2 class="font-serif text-3xl md:text-5xl font-bold mt-2 mb-4">Explore Our Signature Menu</h2>
+                <p class="text-cream/70 text-sm md:text-base font-light">
+                    From freshly roasted coffee beans to woodfired artisanal pizzas and rich Asian comfort bowls.
+                </p>
+
+                <!-- PDF Menu Trigger Bar -->
+                <div class="mt-6 flex items-center justify-center">
+                    <button onclick="openPdfModal()" class="bg-gradient-to-r from-amber-gold to-amber-accent text-plum-dark hover:brightness-110 font-bold px-6 py-3 rounded-full shadow-lg transition flex items-center space-x-3 text-sm">
+                        <i class="fas fa-file-pdf text-lg"></i>
+                        <span>View & Download Full PDF Menu</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Menu Category Navigation -->
+            <div class="flex items-center justify-start md:justify-center space-x-2 overflow-x-auto pb-4 mb-8 no-scrollbar">
+                <button onclick="switchTab('brews')" id="tab-brews" class="menu-tab-btn px-5 py-2.5 rounded-full text-xs md:text-sm font-medium bg-amber-gold text-plum-dark whitespace-nowrap transition">
+                    ☕ Specialty Brews
+                </button>
+                <button onclick="switchTab('pizzas')" id="tab-pizzas" class="menu-tab-btn px-5 py-2.5 rounded-full text-xs md:text-sm font-medium bg-plum/80 text-cream hover:bg-plum border border-amber-gold/20 whitespace-nowrap transition">
+                    🍕 Woodfired Pizzas
+                </button>
+                <button onclick="switchTab('pastas')" id="tab-pastas" class="menu-tab-btn px-5 py-2.5 rounded-full text-xs md:text-sm font-medium bg-plum/80 text-cream hover:bg-plum border border-amber-gold/20 whitespace-nowrap transition">
+                    🍜 Pastas & Asian Bowls
+                </button>
+                <button onclick="switchTab('shakes')" id="tab-shakes" class="menu-tab-btn px-5 py-2.5 rounded-full text-xs md:text-sm font-medium bg-plum/80 text-cream hover:bg-plum border border-amber-gold/20 whitespace-nowrap transition">
+                    🥤 Shakes & Teas
+                </button>
+                <button onclick="switchTab('desserts')" id="tab-desserts" class="menu-tab-btn px-5 py-2.5 rounded-full text-xs md:text-sm font-medium bg-plum/80 text-cream hover:bg-plum border border-amber-gold/20 whitespace-nowrap transition">
+                    🍰 Artisanal Desserts
+                </button>
+            </div>
+
+            <!-- Tab Content Containers -->
+            <!-- 1. Coffee & Brews -->
+            <div id="content-brews" class="menu-content grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <div class="bg-plum/60 border border-amber-gold/20 rounded-xl p-5 hover:border-amber-gold/50 transition flex justify-between items-start">
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <h3 class="font-serif font-bold text-lg text-cream">Viennese Coffee</h3>
+                            <span class="bg-amber-gold/20 text-amber-gold text-[10px] px-2 py-0.5 rounded font-bold uppercase">Bestseller</span>
+                        </div>
+                        <p class="text-cream/70 text-xs mt-1">Rich espresso layered with whipped cream, cocoa dust, and cinnamon essence.</p>
+                    </div>
+                    <span class="font-serif font-bold text-amber-gold text-lg ml-4">₹220</span>
+                </div>
+
+                <div class="bg-plum/60 border border-amber-gold/20 rounded-xl p-5 hover:border-amber-gold/50 transition flex justify-between items-start">
+                    <div>
+                        <h3 class="font-serif font-bold text-lg text-cream">Flat White</h3>
+                        <p class="text-cream/70 text-xs mt-1">Micro-foamed steamed milk poured over a double shot of ristretto espresso.</p>
+                    </div>
+                    <span class="font-serif font-bold text-amber-gold text-lg ml-4">₹190</span>
+                </div>
+
+                <div class="bg-plum/60 border border-amber-gold/20 rounded-xl p-5 hover:border-amber-gold/50 transition flex justify-between items-start">
+                    <div>
+                        <h3 class="font-serif font-bold text-lg text-cream">Hand-Poured Pour Over</h3>
+                        <p class="text-cream/70 text-xs mt-1">Slow artisanal drip highlighting subtle citrus and floral roast notes.</p>
+                    </div>
+                    <span class="font-serif font-bold text-amber-gold text-lg ml-4">₹210</span>
+                </div>
+
+                <div class="bg-plum/60 border border-amber-gold/20 rounded-xl p-5 hover:border-amber-gold/50 transition flex justify-between items-start">
+                    <div>
+                        <h3 class="font-serif font-bold text-lg text-cream">Vanilla Hazelnut Iced Latte</h3>
+                        <p class="text-cream/70 text-xs mt-1">Chilled espresso with house hazelnut syrup, cold milk, and crushed ice.</p>
+                    </div>
+                    <span class="font-serif font-bold text-amber-gold text-lg ml-4">₹240</span>
+                </div>
+            </div>
+
+            <!-- 2. Woodfired Pizzas -->
+            <div id="content-pizzas" class="menu-content hidden grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <div class="bg-plum/60 border border-amber-gold/20 rounded-xl p-5 hover:border-amber-gold/50 transition flex justify-between items-start">
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <h3 class="font-serif font-bold text-lg text-cream">12" Ottoman Empire Pizza</h3>
+                            <span class="bg-amber-gold/20 text-amber-gold text-[10px] px-2 py-0.5 rounded font-bold uppercase">Signature</span>
+                        </div>
+                        <p class="text-cream/70 text-xs mt-1">Hand-stretched crust, spiced lamb or roasted veggies, sumac onions, fresh herbs & garlic yogurt glaze.</p>
+                    </div>
+                    <span class="font-serif font-bold text-amber-gold text-lg ml-4">₹540</span>
+                </div>
+
+                <div class="bg-plum/60 border border-amber-gold/20 rounded-xl p-5 hover:border-amber-gold/50 transition flex justify-between items-start">
+                    <div>
+                        <h3 class="font-serif font-bold text-lg text-cream">Salami Napoli Woodfired</h3>
+                        <p class="text-cream/70 text-xs mt-1">San Marzano tomato base, fresh fior di latte mozzarella, artisanal pepperoni & basil oil.</p>
+                    </div>
+                    <span class="font-serif font-bold text-amber-gold text-lg ml-4">₹520</span>
+                </div>
+
+                <div class="bg-plum/60 border border-amber-gold/20 rounded-xl p-5 hover:border-amber-gold/50 transition flex justify-between items-start">
+                    <div>
+                        <h3 class="font-serif font-bold text-lg text-cream">Truffle Mushroom & Wild Herbs</h3>
+                        <p class="text-cream/70 text-xs mt-1">White base, sauteed wild mushrooms, white truffle oil drizzled over melted fontina cheese.</p>
+                    </div>
+                    <span class="font-serif font-bold text-amber-gold text-lg ml-4">₹490</span>
+                </div>
+
+                <div class="bg-plum/60 border border-amber-gold/20 rounded-xl p-5 hover:border-amber-gold/50 transition flex justify-between items-start">
+                    <div>
+                        <h3 class="font-serif font-bold text-lg text-cream">Classic Margherita Rustica</h3>
+                        <p class="text-cream/70 text-xs mt-1">Classic crushed plum tomatoes, fresh buffalo mozzarella, extra virgin olive oil & fresh basil.</p>
+                    </div>
+                    <span class="font-serif font-bold text-amber-gold text-lg ml-4">₹390</span>
+                </div>
+            </div>
+
+            <!-- 3. Pastas & Asian Bowls -->
+            <div id="content-pastas" class="menu-content hidden grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <div class="bg-plum/60 border border-amber-gold/20 rounded-xl p-5 hover:border-amber-gold/50 transition flex justify-between items-start">
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <h3 class="font-serif font-bold text-lg text-cream">Signature Thai Green Curry & Jasmine Rice</h3>
+                            <span class="bg-amber-gold/20 text-amber-gold text-[10px] px-2 py-0.5 rounded font-bold uppercase">Must Try</span>
+                        </div>
+                        <p class="text-cream/70 text-xs mt-1">Authentic coconut green curry broth infused with galangal, lemongrass, exotic vegetables & fragrant jasmine rice.</p>
+                    </div>
+                    <span class="font-serif font-bold text-amber-gold text-lg ml-4">₹420</span>
+                </div>
+
+                <div class="bg-plum/60 border border-amber-gold/20 rounded-xl p-5 hover:border-amber-gold/50 transition flex justify-between items-start">
+                    <div>
+                        <h3 class="font-serif font-bold text-lg text-cream">Spaghetti Aglio Olio e Peperoncino</h3>
+                        <p class="text-cream/70 text-xs mt-1">Al dente spaghetti tossed in extra virgin olive oil, golden garlic slices, chilli flakes & parmesan cheese.</p>
+                    </div>
+                    <span class="font-serif font-bold text-amber-gold text-lg ml-4">₹380</span>
+                </div>
+
+                <div class="bg-plum/60 border border-amber-gold/20 rounded-xl p-5 hover:border-amber-gold/50 transition flex justify-between items-start">
+                    <div>
+                        <h3 class="font-serif font-bold text-lg text-cream">Penne Pink Sauce Alfredo Marinara</h3>
+                        <p class="text-cream/70 text-xs mt-1">Creamy blend of rich parmesan sauce and tangy tomato concasse with fresh basil.</p>
+                    </div>
+                    <span class="font-serif font-bold text-amber-gold text-lg ml-4">₹390</span>
+                </div>
+
+                <div class="bg-plum/60 border border-amber-gold/20 rounded-xl p-5 hover:border-amber-gold/50 transition flex justify-between items-start">
+                    <div>
+                        <h3 class="font-serif font-bold text-lg text-cream">Koreand BBQ Teriyaki Noodle Bowl</h3>
+                        <p class="text-cream/70 text-xs mt-1">Wok-tossed noodles with grilled seasonal greens, sesame, and sweet glazed BBQ sauce.</p>
+                    </div>
+                    <span class="font-serif font-bold text-amber-gold text-lg ml-4">₹410</span>
+                </div>
+            </div>
+
+            <!-- 4. Shakes & Refreshers -->
+            <div id="content-shakes" class="menu-content hidden grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <div class="bg-plum/60 border border-amber-gold/20 rounded-xl p-5 hover:border-amber-gold/50 transition flex justify-between items-start">
+                    <div>
+                        <h3 class="font-serif font-bold text-lg text-cream">Wild Berry & Mint Iced Tea</h3>
+                        <p class="text-cream/70 text-xs mt-1">House-brewed black tea infused with muddled forest berries and fresh garden mint.</p>
+                    </div>
+                    <span class="font-serif font-bold text-amber-gold text-lg ml-4">₹210</span>
+                </div>
+
+                <div class="bg-plum/60 border border-amber-gold/20 rounded-xl p-5 hover:border-amber-gold/50 transition flex justify-between items-start">
+                    <div>
+                        <h3 class="font-serif font-bold text-lg text-cream">Belgian Dark Chocolate Thick Shake</h3>
+                        <p class="text-cream/70 text-xs mt-1">Ultra-thick shake blended with 70% dark Belgian chocolate and vanilla bean cream.</p>
+                    </div>
+                    <span class="font-serif font-bold text-amber-gold text-lg ml-4">₹260</span>
+                </div>
+            </div>
+
+            <!-- 5. Desserts -->
+            <div id="content-desserts" class="menu-content hidden grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <div class="bg-plum/60 border border-amber-gold/20 rounded-xl p-5 hover:border-amber-gold/50 transition flex justify-between items-start">
+                    <div>
+                        <h3 class="font-serif font-bold text-lg text-cream">Classic Tiramisu</h3>
+                        <p class="text-cream/70 text-xs mt-1">Espresso-soaked ladyfingers layered with rich mascarpone cream and cocoa dust.</p>
+                    </div>
+                    <span class="font-serif font-bold text-amber-gold text-lg ml-4">₹280</span>
+                </div>
+
+                <div class="bg-plum/60 border border-amber-gold/20 rounded-xl p-5 hover:border-amber-gold/50 transition flex justify-between items-start">
+                    <div>
+                        <h3 class="font-serif font-bold text-lg text-cream">Warm Gooey Chocolate Lava Cake</h3>
+                        <p class="text-cream/70 text-xs mt-1">Molten dark chocolate cake served with a scoop of vanilla bean ice cream.</p>
+                    </div>
+                    <span class="font-serif font-bold text-amber-gold text-lg ml-4">₹260</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Atmosphere & Gallery Section -->
+    <section id="atmosphere" class="py-20 bg-cream-dark">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-sage font-semibold text-xs md:text-sm uppercase tracking-widest">Cozy Retreat</span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-plum-dark mt-1">The Mangosteen Experience</h2>
+                <p class="text-gray-600 text-sm md:text-base mt-2">Designed for long conversations, creative focus, and delightful culinary moments.</p>
+            </div>
+
+            <!-- Photo Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="group relative rounded-2xl overflow-hidden shadow-md h-64 border border-gray-200">
+                    <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80" alt="Cafe Outdoor Seating" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-plum-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                        <span class="text-cream font-medium text-sm">Lush Outdoor Garden Patio</span>
+                    </div>
+                </div>
+
+                <div class="group relative rounded-2xl overflow-hidden shadow-md h-64 border border-gray-200">
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80" alt="Fresh Coffee Brewing" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-plum-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                        <span class="text-cream font-medium text-sm">Freshly Ground Specialty Brews</span>
+                    </div>
+                </div>
+
+                <div class="group relative rounded-2xl overflow-hidden shadow-md h-64 border border-gray-200">
+                    <img src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=80" alt="Artisanal Pizza Preparation" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-plum-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                        <span class="text-cream font-medium text-sm">Woodfired Pizza Oven</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Grid -->
+    <section class="py-16 bg-cream border-y border-gray-200">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
+                <div class="p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <i class="fas fa-wifi text-2xl text-amber-gold mb-2"></i>
+                    <h4 class="font-bold text-plum-dark text-xs md:text-sm">High-Speed Wi-Fi</h4>
+                    <p class="text-[11px] text-gray-500 mt-1">Work friendly nook</p>
+                </div>
+                <div class="p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <i class="fas fa-dog text-2xl text-amber-gold mb-2"></i>
+                    <h4 class="font-bold text-plum-dark text-xs md:text-sm">Pet Friendly</h4>
+                    <p class="text-[11px] text-gray-500 mt-1">Bring your furry friends</p>
+                </div>
+                <div class="p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <i class="fas fa-chair text-2xl text-amber-gold mb-2"></i>
+                    <h4 class="font-bold text-plum-dark text-xs md:text-sm">Indoor & Outdoor</h4>
+                    <p class="text-[11px] text-gray-500 mt-1">Cozy seating zones</p>
+                </div>
+                <div class="p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <i class="fas fa-smoking text-2xl text-amber-gold mb-2"></i>
+                    <h4 class="font-bold text-plum-dark text-xs md:text-sm">Smoking Area</h4>
+                    <p class="text-[11px] text-gray-500 mt-1">Dedicated open lounge</p>
+                </div>
+                <div class="p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <i class="fas fa-leaf text-2xl text-amber-gold mb-2"></i>
+                    <h4 class="font-bold text-plum-dark text-xs md:text-sm">Vegan Options</h4>
+                    <p class="text-[11px] text-gray-500 mt-1">Plant-based choices</p>
+                </div>
+                <div class="p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <i class="fas fa-parking text-2xl text-amber-gold mb-2"></i>
+                    <h4 class="font-bold text-plum-dark text-xs md:text-sm">Ample Parking</h4>
+                    <p class="text-[11px] text-gray-500 mt-1">Hassle-free parking space</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-20 bg-sage text-cream">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <div class="flex justify-center items-center space-x-1 text-amber-gold text-xl mb-2">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <h2 class="font-serif text-3xl md:text-5xl font-bold">Loved by 2,200+ Foodies in Indore</h2>
+                <p class="text-sage-soft/80 text-sm md:text-base mt-2">Real Google & Justdial reviews from our cherished community members.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review Card 1 -->
+                <div class="bg-sage-light/40 backdrop-blur-md p-6 rounded-2xl border border-sage-light/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-gold text-sm mb-3">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-cream/90 text-sm leading-relaxed italic">
+                            "Mangosteen Cafe is hands down my favorite place in Indore! The Viennese coffee and the Ottoman Empire pizza are to die for. The vibes are super relaxing for reading or remote work."
+                        </p>
+                    </div>
+                    <div class="mt-6 flex items-center space-x-3 pt-4 border-t border-cream/10">
+                        <div class="w-10 h-10 rounded-full bg-amber-gold text-plum-dark font-bold flex items-center justify-center">
+                            AV
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-cream">Aman Verma</h4>
+                            <span class="text-xs text-cream/60">Local Guide • Google Review</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review Card 2 -->
+                <div class="bg-sage-light/40 backdrop-blur-md p-6 rounded-2xl border border-sage-light/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-gold text-sm mb-3">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-cream/90 text-sm leading-relaxed italic">
+                            "Been coming here for 5+ years now. Their Thai Green Curry bowl never fails to comfort me. Great staff, super aesthetic outdoor seating, and solid Wi-Fi connection."
+                        </p>
+                    </div>
+                    <div class="mt-6 flex items-center space-x-3 pt-4 border-t border-cream/10">
+                        <div class="w-10 h-10 rounded-full bg-amber-accent text-plum-dark font-bold flex items-center justify-center">
+                            PS
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-cream">Pooja Sharma</h4>
+                            <span class="text-xs text-cream/60">Indore Resident</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review Card 3 -->
+                <div class="bg-sage-light/40 backdrop-blur-md p-6 rounded-2xl border border-sage-light/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-gold text-sm mb-3">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-cream/90 text-sm leading-relaxed italic">
+                            "Top notch artisanal pizza in Indore! The woodfired crust has that authentic leopard spotting. Amazing ambiance near Mayank Blue Water Park Road."
+                        </p>
+                    </div>
+                    <div class="mt-6 flex items-center space-x-3 pt-4 border-t border-cream/10">
+                        <div class="w-10 h-10 rounded-full bg-cream text-plum-dark font-bold flex items-center justify-center">
+                            RJ
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-cream">Rahul Jain</h4>
+                            <span class="text-xs text-cream/60">Food Blogger</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact, Location & Opening Hours Section -->
+    <section id="location" class="py-20 bg-cream">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Info Side -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div>
+                        <span class="text-sage font-semibold text-xs uppercase tracking-widest">Find Us</span>
+                        <h2 class="font-serif text-3xl md:text-4xl font-bold text-plum-dark mt-1">Visit Mangosteen Cafe</h2>
+                        <p class="text-gray-600 text-sm mt-2">We look forward to hosting you in our warm eco-lifestyle space.</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Address -->
+                        <div class="flex items-start space-x-4">
+                            <div class="w-11 h-11 rounded-xl bg-plum text-amber-gold flex items-center justify-center shrink-0 shadow">
+                                <i class="fas fa-map-marker-alt text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-plum-dark text-base">Address</h3>
+                                <p class="text-gray-600 text-sm mt-1 leading-relaxed">
+                                    Olympus, near Mayank Blue Water Park Road, Bicholi Mardana, Indore, Madhya Pradesh 452016
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Hours -->
+                        <div class="flex items-start space-x-4">
+                            <div class="w-11 h-11 rounded-xl bg-plum text-amber-gold flex items-center justify-center shrink-0 shadow">
+                                <i class="fas fa-clock text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-plum-dark text-base">Opening Hours</h3>
+                                <p class="text-gray-600 text-sm mt-1">
+                                    <strong>Monday – Sunday:</strong> 11:00 AM – 11:30 PM<br>
+                                    <span class="text-sage text-xs font-medium">Open Everyday for Dine-in & Takeaway</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Phone & Email -->
+                        <div class="flex items-start space-x-4">
+                            <div class="w-11 h-11 rounded-xl bg-plum text-amber-gold flex items-center justify-center shrink-0 shadow">
+                                <i class="fas fa-phone-alt text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-plum-dark text-base">Get in Touch</h3>
+                                <p class="text-gray-600 text-sm mt-1">
+                                    <a href="tel:+919238806060" class="hover:text-amber-gold transition">+91 92388 06060</a> / 
+                                    <a href="tel:+919238706060" class="hover:text-amber-gold transition">+91 92387 06060</a><br>
+                                    <a href="mailto:saurabh@mangosteen.co.in" class="hover:text-amber-gold transition text-xs font-medium text-plum">saurabh@mangosteen.co.in</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Direct Reserve CTA -->
+                    <div class="pt-2">
+                        <button onclick="openBookingModal()" class="w-full bg-plum hover:bg-plum-dark text-amber-gold font-bold py-3.5 px-6 rounded-xl shadow-lg transition flex items-center justify-center space-x-2">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Reserve a Table Online</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Map Frame -->
+                <div class="lg:col-span-7 bg-white p-3 rounded-2xl shadow-xl border border-gray-200 h-[450px] relative overflow-hidden">
+                    <iframe 
+                        title="Mangosteen Cafe Location Map"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680.523821012929!2d75.912!3d22.709!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962e2d93e1b7f8f%3A0x8e826b5d9bc8c201!2sMangosteen%20Cafe!5e0!3m2!1sen!2sin!4v1680000000000!5m2!1sen!2sin" 
+                        class="w-full h-full rounded-xl border-0" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive PDF Menu Modal -->
+    <div id="pdf-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 transition-opacity duration-300">
+        <div class="bg-cream border-2 border-amber-gold/50 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative p-6 md:p-8">
+            <!-- Close Button -->
+            <button onclick="closePdfModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-plum text-amber-gold flex items-center justify-center hover:bg-plum-dark transition">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+
+            <!-- PDF Header -->
+            <div class="text-center border-b border-amber-gold/30 pb-6 mb-6">
+                <div class="w-12 h-12 rounded-full bg-plum text-amber-gold flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-file-pdf text-xl"></i>
+                </div>
+                <h3 class="font-serif text-2xl md:text-3xl font-bold text-plum-dark">Mangosteen Cafe — Official Menu</h3>
+                <p class="text-gray-600 text-xs md:text-sm mt-1">Bicholi Mardana, Indore | Phone: +91 92388 06060</p>
+            </div>
+
+            <!-- Styled PDF Document Preview Content -->
+            <div class="space-y-6 bg-white p-6 rounded-xl border border-gray-200 text-gray-800 shadow-inner font-serif">
+                <!-- Coffee & Brews -->
+                <div>
+                    <h4 class="font-bold text-plum border-b border-amber-gold/40 pb-1 text-lg mb-3 flex justify-between">
+                        <span>COFFEE & SPECIALTY BREWS</span>
+                        <span class="text-xs font-sans text-gray-500 font-normal">Freshly Roasted</span>
+                    </h4>
+                    <div class="space-y-2 text-sm font-sans">
+                        <div class="flex justify-between">
+                            <span>Viennese Espresso & Whipped Cream</span>
+                            <span class="font-bold">₹220</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Artisanal Pour-Over Coffee</span>
+                            <span class="font-bold">₹210</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Iced Vanilla Hazelnut Latte</span>
+                            <span class="font-bold">₹240</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pizzas -->
+                <div>
+                    <h4 class="font-bold text-plum border-b border-amber-gold/40 pb-1 text-lg mb-3 flex justify-between">
+                        <span>WOODFIRED ARTISANAL PIZZAS (12")</span>
+                        <span class="text-xs font-sans text-gray-500 font-normal">Fresh Mozzarella</span>
+                    </h4>
+                    <div class="space-y-2 text-sm font-sans">
+                        <div class="flex justify-between">
+                            <span>12" Ottoman Empire Pizza</span>
+                            <span class="font-bold">₹540</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Salami Napoli Woodfired</span>
+                            <span class="font-bold">₹520</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Truffle Wild Mushroom</span>
+                            <span class="font-bold">₹490</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Asian Bowls -->
+                <div>
+                    <h4 class="font-bold text-plum border-b border-amber-gold/40 pb-1 text-lg mb-3 flex justify-between">
+                        <span>MAINS & ASIAN BOWLS</span>
+                        <span class="text-xs font-sans text-gray-500 font-normal">Chef Special</span>
+                    </h4>
+                    <div class="space-y-2 text-sm font-sans">
+                        <div class="flex justify-between">
+                            <span>Thai Green Curry with Jasmine Rice</span>
+                            <span class="font-bold">₹420</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Spaghetti Aglio Olio e Peperoncino</span>
+                            <span class="font-bold">₹380</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PDF Actions -->
+            <div class="mt-6 flex flex-col sm:flex-row items-center justify-end gap-3">
+                <button onclick="downloadPdfMock()" class="w-full sm:w-auto bg-amber-gold hover:bg-amber-accent text-plum-dark font-bold px-6 py-2.5 rounded-lg shadow transition text-sm flex items-center justify-center space-x-2">
+                    <i class="fas fa-download"></i>
+                    <span>Download Menu (PDF)</span>
+                </button>
+                <button onclick="closePdfModal()" class="w-full sm:w-auto bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium px-5 py-2.5 rounded-lg transition text-sm">
+                    Close Preview
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table Reservation Modal -->
+    <div id="booking-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-cream border border-amber-gold/40 rounded-2xl max-w-md w-full shadow-2xl relative p-6 md:p-8">
+            <!-- Close Button -->
+            <button onclick="closeBookingModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-plum text-amber-gold flex items-center justify-center hover:bg-plum-dark transition">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-full bg-amber-gold/20 text-amber-gold flex items-center justify-center mx-auto mb-2">
+                    <i class="fas fa-utensils text-xl"></i>
+                </div>
+                <h3 class="font-serif text-2xl font-bold text-plum-dark">Reserve Your Table</h3>
+                <p class="text-xs text-gray-600 mt-1">Mangosteen Cafe, Bicholi Mardana, Indore</p>
+            </div>
+
+            <form onsubmit="handleReservation(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-plum-dark uppercase mb-1">Your Name</label>
+                    <input type="text" required placeholder="e.g. Rahul Sharma" class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-amber-gold bg-white">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-plum-dark uppercase mb-1">Phone Number</label>
+                    <input type="tel" required placeholder="+91 98765 43210" class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-amber-gold bg-white">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-plum-dark uppercase mb-1">Guests</label>
+                        <select class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-amber-gold bg-white">
+                            <option>2 People</option>
+                            <option>3-4 People</option>
+                            <option>5-8 People</option>
+                            <option>8+ Group</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-plum-dark uppercase mb-1">Time Slot</label>
+                        <select class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-amber-gold bg-white">
+                            <option>12:00 PM</option>
+                            <option>2:00 PM</option>
+                            <option>5:00 PM</option>
+                            <option>7:30 PM</option>
+                            <option>9:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-plum-dark uppercase mb-1">Seating Preference</label>
+                    <select class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-amber-gold bg-white">
+                        <option>Cozy Outdoor Garden Patio</option>
+                        <option>Indoor Work & Coffee Lounge</option>
+                        <option>No Preference</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-amber-gold to-amber-accent text-plum-dark font-bold py-3 rounded-lg shadow-md hover:brightness-105 transition text-sm mt-2">
+                    Confirm Reservation Request
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-plum text-cream px-5 py-3.5 rounded-xl shadow-2xl border border-amber-gold hidden items-center space-x-3 transition-all duration-300">
+        <i class="fas fa-check-circle text-amber-gold text-lg"></i>
+        <span id="toast-message" class="text-xs md:text-sm font-medium">Reservation request sent! We will confirm via call.</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-plum-dark text-cream/70 py-12 border-t border-amber-gold/20">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Column 1 -->
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-leaf text-amber-gold"></i>
+                        <span class="font-serif text-xl font-bold text-cream">Mangosteen Cafe</span>
+                    </div>
+                    <p class="text-xs leading-relaxed text-cream/60">
+                        Indore's beloved lifestyle cafe. Serving artisanal coffee, woodfired pizzas & healthy global bowls for over 15 years.
+                    </p>
+                </div>
+
+                <!-- Column 2 -->
+                <div>
+                    <h4 class="font-serif text-cream font-bold text-sm mb-3 border-b border-amber-gold/30 pb-1 inline-block">Quick Links</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#about" class="hover:text-amber-gold transition">About 15 Years Story</a></li>
+                        <li><a href="#menu" class="hover:text-amber-gold transition">Interactive Menu</a></li>
+                        <li><a href="#reviews" class="hover:text-amber-gold transition">Customer Reviews</a></li>
+                        <li><a href="#location" class="hover:text-amber-gold transition">Hours & Location</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3 -->
+                <div>
+                    <h4 class="font-serif text-cream font-bold text-sm mb-3 border-b border-amber-gold/30 pb-1 inline-block">Top Delights</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><span>☕ Viennese Espresso</span></li>
+                        <li><span>🍕 12" Ottoman Empire Pizza</span></li>
+                        <li><span>🍜 Thai Green Curry Bowl</span></li>
+                        <li><span>🥤 Berry Mint Iced Tea</span></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4 -->
+                <div>
+                    <h4 class="font-serif text-cream font-bold text-sm mb-3 border-b border-amber-gold/30 pb-1 inline-block">Contact</h4>
+                    <p class="text-xs space-y-1">
+                        <span class="block">Olympus, Mayank Blue Water Park Rd</span>
+                        <span class="block">Bicholi Mardana, Indore</span>
+                        <span class="block text-amber-gold mt-2">+91 92388 06060</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-cream/10 text-center text-xs text-cream/50 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p>&copy; 2026 Mangosteen Cafe, Indore. All rights reserved.</p>
+                <p class="text-[11px]">Crafted with care for Mangosteen Cafe pitch presentation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript Logic -->
+    <script>
+        // Toggle Pitch Bar
+        function togglePitchBar() {
+            const bar = document.getElementById('pitch-bar');
+            bar.classList.add('hidden');
+        }
+
+        // Toggle Mobile Navigation Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Switch Interactive Menu Tabs
+        function switchTab(category) {
+            // Hide all tab content
+            const contents = document.querySelectorAll('.menu-content');
+            contents.forEach(content => content.classList.add('hidden'));
+
+            // Remove active styling from all buttons
+            const buttons = document.querySelectorAll('.menu-tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-amber-gold', 'text-plum-dark');
+                btn.classList.add('bg-plum/80', 'text-cream');
+            });
+
+            // Show target content
+            const targetContent = document.getElementById(`content-${category}`);
+            if (targetContent) {
+                targetContent.classList.remove('hidden');
+            }
+
+            // Highlight target button
+            const targetBtn = document.getElementById(`tab-${category}`);
+            if (targetBtn) {
+                targetBtn.classList.remove('bg-plum/80', 'text-cream');
+                targetBtn.classList.add('bg-amber-gold', 'text-plum-dark');
+            }
+        }
+
+        // PDF Menu Modal Controls
+        function openPdfModal() {
+            const modal = document.getElementById('pdf-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closePdfModal() {
+            const modal = document.getElementById('pdf-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function downloadPdfMock() {
+            showToast("Downloading Mangosteen Cafe PDF Menu...");
+        }
+
+        // Table Booking Modal Controls
+        function openBookingModal() {
+            const modal = document.getElementById('booking-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeBookingModal() {
+            const modal = document.getElementById('booking-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function handleReservation(event) {
+            event.preventDefault();
+            closeBookingModal();
+            showToast("Table reservation request received! We will call you shortly to confirm.");
+        }
+
+        // Notification Toast Handler
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            toastMessage.innerText = message;
+            
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+
+            setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
